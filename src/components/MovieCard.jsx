@@ -1,43 +1,55 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Card, CardMedia, CardContent, Typography, Box, Rating } from '@mui/material';
+import { Link } from "react-router-dom"
+import { Card, CardMedia, CardContent, Typography, Box, Rating } from "@mui/material"
 
 function MovieCard({ id, title, posterPath, releaseDate, voteAverage }) {
-  const year = releaseDate ? new Date(releaseDate).getFullYear() : 'N/A';
-  const imageUrl = posterPath 
-    ? `https://image.tmdb.org/t/p/w500${posterPath}` 
-    : 'https://via.placeholder.com/500x750?text=No+Image';
+  const year = releaseDate ? new Date(releaseDate).getFullYear() : "N/A"
+  const imageUrl = posterPath
+    ? `https://image.tmdb.org/t/p/w500${posterPath}`
+    : "https://via.placeholder.com/500x750?text=No+Image"
 
   return (
-    <Card 
-      component={Link} 
-      to={`/movie/${id}`} 
-      sx={{ 
-        height: '100%', 
-        display: 'flex', 
-        flexDirection: 'column',
-        textDecoration: 'none',
-        transition: 'transform 0.2s',
-        '&:hover': {
-          transform: 'scale(1.05)'
-        }
+    <Card
+      component={Link}
+      to={`/movie/${id}`}
+      sx={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        textDecoration: "none",
+        transition: "all 0.3s ease",
+        transform: "translateY(0)",
+        "&:hover": {
+          transform: "translateY(-8px)",
+          boxShadow: (theme) => `0 10px 20px ${theme.palette.mode === "dark" ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.2)"}`,
+          "& .movie-poster": {
+            transform: "scale(1.05)",
+          },
+        },
+        overflow: "hidden",
+        borderRadius: 2,
       }}
     >
-      <CardMedia
-        component="img"
-        image={imageUrl}
-        alt={title}
-        sx={{ aspectRatio: '2/3' }}
-      />
+      <Box sx={{ overflow: "hidden" }}>
+        <CardMedia
+          component="img"
+          image={imageUrl}
+          alt={title}
+          sx={{
+            aspectRatio: "2/3",
+            transition: "transform 0.5s ease",
+          }}
+          className="movie-poster"
+        />
+      </Box>
       <CardContent sx={{ flexGrow: 1, p: 2 }}>
-        <Typography variant="subtitle1" component="h3" noWrap>
+        <Typography variant="subtitle1" component="h3" noWrap fontWeight="bold">
           {title}
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1 }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mt: 1 }}>
           <Typography variant="body2" color="text.secondary">
             {year}
           </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <Rating value={voteAverage / 2} precision={0.5} size="small" readOnly />
             <Typography variant="body2" color="text.secondary" sx={{ ml: 0.5 }}>
               {voteAverage.toFixed(1)}
@@ -46,7 +58,7 @@ function MovieCard({ id, title, posterPath, releaseDate, voteAverage }) {
         </Box>
       </CardContent>
     </Card>
-  );
+  )
 }
 
-export default MovieCard;
+export default MovieCard
