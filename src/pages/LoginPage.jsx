@@ -112,7 +112,7 @@ function LoginPage() {
                 Sign In
               </Button>
               <Typography variant="body2" color="text.secondary" align="center">
-                For demo purposes, any username and password will work
+                Login to add movies to your favorites watchlist!
               </Typography>
             </Box>
           </Box>
